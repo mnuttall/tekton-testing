@@ -1,0 +1,31 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: simple-git-source-latest
+spec:
+  type: git
+  params:
+  - name: revision
+    value: 79f207a
+  - name: url
+    value: https://github.ibm.com/swiss-cloud/sample.git
+
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: simple-image-resource-latest
+spec:
+  type: image
+  params:
+  - name: url
+    # In the examples below {{.REPONAME}} will be replaced for you but the username must be set yourself.
+
+    # To use the public Docker registry:
+    # value: docker.io/<Your username>/{{.REPONAME}}
+  
+    # To use `latest` as the tag:
+    # value: host.docker.internal:5000/knative/{{.REPONAME}}
+
+  # To use the commit ID as the tag:
+value: mycluster.icp:8500/default/sample:79f207a

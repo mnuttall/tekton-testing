@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+# SHORTID and MARKER are used to ensure we have uniquely named pipeline runs
+# These should not be modified directly: it will be done by the event handler.
+metadata:
+  name: simple-pipelinerun
+spec:
+  pipelineRef:
+    name: simple-pipeline
+  trigger:
+    type: manual
+  serviceAccount: 'mark'
+  resources:
+  - name: source-repo
+    resourceRef:
+      name: simple-git-source-latest
+  - name: image-name
+    resourceRef: 
+      name: simple-image-resource-latest

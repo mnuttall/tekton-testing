@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: simple-pipeline
+spec:
+  resources: 
+  - name: source-repo
+    type: git
+  - name: image-name
+    type: image
+  tasks:
+  - name: build-simple
+    taskRef:
+      name: build-push
+    resources:
+      inputs:
+      - name: docker-source
+        resource: source-repo
+      outputs:
+      - name: builtImage
+        resource: image-name
+resource: source-repo
