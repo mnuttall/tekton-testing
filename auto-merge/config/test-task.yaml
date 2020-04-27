@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: test-task
+spec:
+  inputs:
+    resources:
+      - name: git-source
+        type: git
+      - name: pull-request
+        type: pullRequest
+  steps:
+  - name: one
+    image: mnuttall/hub-test
+    command:
+    - /bin/bash 
+    args:
+    - -ce 
+    - |
+      sleep 10000

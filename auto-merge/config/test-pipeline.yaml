@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: test-pipeline
+spec:
+  resources: 
+  - name: source-repo
+    type: git
+  - name: pr
+    type: pullRequest
+  tasks:
+  - name: do-this-first
+    taskRef:
+      name: test-task
+    resources:
+      inputs:
+      - name: git-source
+        resource: source-repo
+      - name: pull-request
+        resource: pr
