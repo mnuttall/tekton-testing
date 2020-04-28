@@ -1,6 +1,6 @@
 A super-simple Tekton pipeline with only one Task. 
 
-By default this PipelineRun will create a Pod with a persistent volume claim. On Kubernetes systems with no default storage provider this will cause the pod to hang:
+Note that the PipelineResources point to an inaccessible source repo and docker registry - that's not important. By default this PipelineRun will create a Pod with a persistent volume claim. On Kubernetes systems with no default storage provider this will cause the pod to hang:
 
 ```
 Volumes:

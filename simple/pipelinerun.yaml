@@ -9,7 +9,6 @@ spec:
     name: simple-pipeline
   trigger:
     type: manual
-  serviceAccount: 'mark'
   resources:
   - name: source-repo
     resourceRef:
