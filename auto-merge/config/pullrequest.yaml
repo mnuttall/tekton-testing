@@ -6,16 +6,8 @@ spec:
   type: pullRequest
   params:
   - name: url
-    value: https://github.com/mnuttall/gitops-example-dev/pull/13
+    value: https://github.com/mnuttall/gitops-example-dev/pull/22
   secrets:
    - fieldName: authToken
      secretName: github-secrets
      secretKey: token
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: github-secrets
-type: Opaque
-data:
-  token: # your github token, base64 encoded

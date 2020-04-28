@@ -1,8 +1,13 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: test-pipeline
+  name: automerge-pipeline
 spec:
+  params:
+  - name: github-secret
+    type: string
+  - name: github-config
+    type: string
   resources: 
   - name: source-repo
     type: git
@@ -11,10 +16,15 @@ spec:
   tasks:
   - name: do-this-first
     taskRef:
-      name: test-task
+      name: automerge-task
     resources:
       inputs:
       - name: git-source
         resource: source-repo
       - name: pull-request
         resource: pr
+    params:
+    - name: github-secret
+      value: $(params.github-secret)
+    - name: github-config
+      value: $(params.github-config)
