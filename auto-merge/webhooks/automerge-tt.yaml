@@ -75,7 +75,4 @@ spec:
           - name: source-repo
             resourceRef:
               name: gitops-repo-$(uid)
-#          - name: pr
-#            resourceRef:
-#              name: pull-request-$(uid)
     

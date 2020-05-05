@@ -17,8 +17,6 @@ spec:
   resources: 
   - name: source-repo
     type: git
-#  - name: pr
-#    type: pullRequest
   tasks:
   - name: test-and-automerge
     taskRef:
@@ -27,8 +25,6 @@ spec:
       inputs:
       - name: git-source
         resource: source-repo
-#      - name: pull-request
-#        resource: pr
     params:
     - name: github-secret
       value: $(params.github-secret)

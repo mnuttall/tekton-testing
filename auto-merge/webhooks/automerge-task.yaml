@@ -15,7 +15,7 @@ spec:
     description: webhook event type. 'push', 'pull_request' are the types we're interested in. 
   - name: branch-name
     type: string
-    description: Git branch name. Only relevant for 'push' events. We want to know if it's 'master' or not.
+    description: Git branch name, from the push or pull_request
   - name: pull-request-url
     type: string
     description: The URL of the pull request, where applicable
@@ -30,8 +30,6 @@ spec:
     resources:
       - name: git-source
         type: git
-#      - name: pull-request
-#        type: pullRequest
   steps:
   - name: check-yaml
     image: mnuttall/hub-test
@@ -59,18 +57,14 @@ spec:
         # GHE requires some extra config
         git config --global --add hub.host github.ibm.com
 
-        # fullPRLink=$(yq r pull-request/pr.json 'Link')
-        # prURL=${fullPRLink%.diff}
-
         cd git-source
         export HUB_VERBOSE=true
-        # hub merge $prURL
         hub merge $(params.pull-request-url)
         git push -u origin master
 
         # Pushing the change will merge the PR. To close the PR we need to delete its branch. 
-        # prBranch=$(yq r /workspace/pull-request/pr.json 'Head.Ref')
-        # git push origin --delete $prBranch
+        # We can do this if we are confident that the PR comes from a branch and not a fork. 
+        echo git push origin --delete $(params.branch-name)
       
       else 
         echo "Unrecognized event-type $(params.event-type)"

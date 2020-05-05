@@ -13,7 +13,7 @@ spec:
   - name: event-type
     value: $(header.X-GitHub-Event)
   - name: branch-name
-    value: notApplicable
+    value: $(body.pull_request.head.ref)
 ---
 
 apiVersion: triggers.tekton.dev/v1alpha1
