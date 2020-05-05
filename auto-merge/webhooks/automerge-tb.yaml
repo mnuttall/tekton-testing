@@ -1,0 +1,34 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: automerge-pipeline-pullrequest-binding
+  namespace: tekton-pipelines
+spec:
+  params:
+  - name: pullrequesturl
+    value: $(body.pull_request.html_url)
+  - name: gitrepositoryurl
+    value: $(body.repository.clone_url)
+  - name: event-type
+    value: $(header.X-GitHub-Event)
+  - name: branch-name
+    value: notApplicable
+---
+
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: automerge-pipeline-push-binding
+  namespace: tekton-pipelines
+spec:
+  params:
+  - name: gitrepositoryurl
+    value: $(body.repository.clone_url)
+  - name: event-type
+    value: $(header.X-GitHub-Event)
+  - name: branch-name
+    value: $(body.ref)
+  # This trigger binding is used in two cases. 
+  # Initial PR to 'promote' into repo: do nothing
+  # git push from task-2: kubectl apply -k

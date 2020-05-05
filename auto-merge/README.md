@@ -31,3 +31,14 @@ tkn pipeline start automerge-pipeline -r source-repo=gitops-repo -r pr=pull-requ
 ```
 
 This will merge the Pull Request and delete the branch it was associated with.
+
+# Webhooks support
+
+Tasks previously in 'config' moved to 'standalone'. GitHub Enterprise and Tekton Webhooks support requires some changes to the task, plus the creation of TriggerTemplates and Bindings. See webhooks/ directory. 
+
+Set up Tekton Dashboard webhooks extension and then initiate with code of the form, 
+
+```
+~/dev/goprojects/src/github.com/rhd-gitops-example/services/services promote --from promote-demo --to https://github.ibm.com/mnuttall/gitops-example-dev.git --service promote-demo --debug --commit-message "Tuesday.1" --repository-type ghe
+2020/05/05 10:17:19 created PR 8
+```
