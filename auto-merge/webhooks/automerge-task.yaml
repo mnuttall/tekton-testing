@@ -65,6 +65,12 @@ spec:
         # Pushing the change will merge the PR. To close the PR we need to delete its branch. 
         # We can do this if we are confident that the PR comes from a branch and not a fork. 
         echo git push origin --delete $(params.branch-name)
+
+        # On GitHub Enterprise - not GitHub.com - the issue will still be open. 
+        # We don't know if this is a bug or a feature. One way to work around this is with code of the form, 
+        # export GITHUB_HOST=github.ibm.com
+        # hub api -XPATCH repos/mnuttall/gitops-example-dev/pulls/4 -f state=closed
+
       
       else 
         echo "Unrecognized event-type $(params.event-type)"
