@@ -70,6 +70,7 @@ spec:
         # We don't know if this is a bug or a feature. One way to work around this is with code of the form, 
         # export GITHUB_HOST=github.ibm.com
         # hub api -XPATCH repos/mnuttall/gitops-example-dev/pulls/4 -f state=closed
+        # See https://github.com/github/hub/issues/1151
 
       
       else 
